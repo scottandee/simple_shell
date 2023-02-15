@@ -3,10 +3,9 @@
 char **token_gen(char *buffer, char *delim)
 {
 	char **split_string = NULL;
-	int i = 0, j, token_num = 0, len = 0;
-	char *str = NULL, *token = NULL;
-	str = strdup(buffer);
-	len = strlen(str);
+	int i = 0, j, token_num = 0;
+	char *str = malloc(sizeof(char) * strlen(buffer)), *token;
+	strcpy(str, buffer);
 	while (str[i] != '\0')
 	{
 		if (*(str + i) == ' ')
@@ -14,21 +13,21 @@ char **token_gen(char *buffer, char *delim)
 		i++;
 	}
 	token_num++;
-	split_string = malloc(sizeof(char) * len);
+	split_string = malloc(sizeof(char *) * (token_num + 1));
 
 	for (j = 0; j < token_num; j++)
 	{
 		if (j == 0)
 		{			
-			token = _strtok(str, delim);
+			token = strtok(str, delim);
 			split_string[j] = malloc(sizeof(char) * (strlen(token)));
-			split_string[j] = strdup(token);
+			strcpy(split_string[j], token);
 		}
 		else
 		{
-			token = _strtok(NULL, delim);
+			token = strtok(NULL, delim);
 			split_string[j] = malloc(sizeof(char) * (strlen(token)));
-			split_string[j] = strdup(token);
+			strcpy(split_string[j], token);
 		}
 	}
 	free(str);
