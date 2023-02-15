@@ -8,7 +8,10 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-void execute(char **argv);
+int execute(char **args);
+char *_strtok(char *str, const char *delim);
+char *_strcpy(char *dest, const char *src);
+size_t _strlen(const char *s);
 char **token_gen(char *buffer, char *delim);
 
 #endif /* _SHELL_H */
