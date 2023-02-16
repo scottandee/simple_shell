@@ -1,9 +1,10 @@
 #include "shell.h"
 
-void execute(char **argv)
+int execute(char **args)
 {
 	pid_t mypid;
-	int status;
+	int status, exe;
+
 	mypid = fork();
 	if (mypid == -1)
 	{
@@ -12,10 +13,15 @@ void execute(char **argv)
 
 	if (mypid == 0)
 	{
-		execve(argv[0], argv, NULL);
+		exe = execve(args[0], args, NULL);
+		if (exe == -1)
+		{
+			perror("Error");
+		}
 	}
 	else
 	{
 		wait(&status);
 	}
+	return (1);
 }
