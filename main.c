@@ -7,21 +7,20 @@ int main(int argc, char **argv)
 	char *dollar = "$ ";
 	size_t size = 0;
 	char *buffer = NULL;
-	char **args;
 	ssize_t read;
+	int status = 1;
 
-	while (1)
+	while (status)
 	{
 		write(STDOUT_FILENO, dollar, 2);
 		read = getline(&buffer, &size, stdin);
 		if (read != -1)
 		{
-			args = token_gen(buffer, " \n");
-			execute(args);
-			free(args);
-			free(buffer);
-			/*write(STDOUT_FILENO, args[0], sizeof(char) * _strlen(args[0]));
-			printf("%s, %lu", args[1], strlen(args[1]));*/
+			argv = token_gen(buffer, " \n");
+			argv[0] = find_path(argv[0]);
+			if (argv[0] == NULL)
+				perror("./shell");
+			execute(argv);
 		}
 		if (read == -1)
 		{
@@ -30,6 +29,8 @@ int main(int argc, char **argv)
 
 
 	}
+	free(argv);
+	free(buffer);
 	return (0);
 
 }
