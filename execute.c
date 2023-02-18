@@ -1,5 +1,10 @@
 #include "shell.h"
-
+/**
+  * execute - this runs the command passed into it
+  * @args: this is an array of strings through which the command is passed
+  * Return: 1 on success
+  * prints out error to stderr if there's failure at any point
+  */
 int execute(char **args)
 {
 	pid_t mypid;
@@ -8,7 +13,7 @@ int execute(char **args)
 	mypid = fork();
 	if (mypid == -1)
 	{
-		perror("Error");
+		perror("./shell");
 	}
 
 	if (mypid == 0)
@@ -16,7 +21,7 @@ int execute(char **args)
 		exe = execve(args[0], args, NULL);
 		if (exe == -1)
 		{
-			perror("Error");
+			perror("./shell");
 		}
 	}
 	else
