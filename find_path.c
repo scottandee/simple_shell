@@ -1,5 +1,11 @@
 #include "shell.h"
-
+/**
+  * find_path - this finds the path in which an executable is in
+  * @command: this is the executable
+  * Return: returns the path if successful,
+  * returns the command if the command passed is the path
+  * returns NULL if it fails
+  */
 char *find_path(char *command)
 {
 	char *path, *temp, *path_copy, *token;
