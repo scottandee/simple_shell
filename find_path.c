@@ -36,9 +36,9 @@ char *find_path(char *command)
 		}
 		temp = malloc(sizeof(char) * (_strlen(command) + _strlen(token) + 2));
 		_strcpy(temp, token);
-		strcat(temp, "/");
-		strcat(temp, command);
-		strcat(temp, "\0");
+		_strcat(temp, "/");
+		_strcat(temp, command);
+		_strcat(temp, "\0");
 		if (stat(temp, &st) == 0)
 		{
 			free(path_copy);
