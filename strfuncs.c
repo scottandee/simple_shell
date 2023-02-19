@@ -1,8 +1,17 @@
 #include "shell.h"
-
+/**
+  * _strtok - this breaks a string in zero or more non-empty strings
+  * @str: this is the string to be split
+  * @delim: this is the separator between the strings to be split
+  * Return: On the first call, it returns the first split part
+  * on subsequent calls, NULL will be put in place of the str and it'll
+  * continue to return an newly broken string till it reaches the end of
+  * the intitial string passed
+  */
 char *_strtok(char *str, const char *delim)
 {
 	static char *buffer = NULL;
+	char *token;
 
 	if (buffer == NULL)
 	{
@@ -13,8 +22,7 @@ char *_strtok(char *str, const char *delim)
 		return (NULL);
 	}
 
-	char *token = buffer;
-
+	token = buffer;
 	while (*buffer != '\0' && *buffer != *delim)
 	{
 		buffer += 1;
@@ -27,6 +35,11 @@ char *_strtok(char *str, const char *delim)
 	return (token);
 }
 
+/**
+  * _strlen - this counts the number of characters present in a string
+  * @s: this is the string to be counted
+  * Return: it returns the length of the string
+  */
 size_t _strlen(const char *s)
 {
 	size_t len = 0;
@@ -39,14 +52,38 @@ size_t _strlen(const char *s)
 	}
 	return (len);
 }
-
+/**
+  * _strcpy - this copies the content of src into dest
+  * @src: this is the source string that will be copied
+  * @dest: this is the destination string in to which the content of src will be copied into
+  * Return: it returns a pointer to the destination string
+  */
 char *_strcpy(char *dest, const char *src)
 {
 	int i = 0;
-	while(src[i] != '\0')
+
+	while (src[i] != '\0')
 	{
 		dest[i] = src[i];
 		i++;
+	}
+	return (dest);
+}
+
+/**
+  * _strcat - this appends the contents of src to destination
+  * @src: this is the string that will be copied from
+  * @dest: this is the string that will be appended to
+  * Return: this returns a pointer to the concatenated string
+  */
+char *_strcat(char *dest, const char *src)
+{
+	int i;
+	int src_len = _strlen(src), dest_len = _strlen(dest);
+	
+	for (i = 0; i < src_len; i++)
+	{
+		dest[dest_len + i] = src[i];
 	}
 	return (dest);
 }
