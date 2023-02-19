@@ -17,11 +17,12 @@ int get_builtin_func(char **args)
 	};
 	int i;
 	int builtin_num = sizeof(builtin_str) / sizeof(char *);
+
 	for (i = 0; i < builtin_num; i++)
 	{
 		if (strcmp(args[0], builtin_str[i]) == 0)
 		{
-			return (*builtin_func[i])(args);
+			return ((*builtin_func[i])(args));
 		}
 	}
 	return (-1);
