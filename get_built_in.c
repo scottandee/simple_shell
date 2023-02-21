@@ -20,7 +20,7 @@ int get_builtin_func(char **args)
 
 	for (i = 0; i < builtin_num; i++)
 	{
-		if (strcmp(args[0], builtin_str[i]) == 0)
+		if (_strcmp(args[0], builtin_str[i]) == 0)
 		{
 			return ((*builtin_func[i])(args));
 		}
