@@ -80,10 +80,36 @@ char *_strcat(char *dest, const char *src)
 {
 	int i;
 	int src_len = _strlen(src), dest_len = _strlen(dest);
-	
+
 	for (i = 0; i < src_len; i++)
 	{
 		dest[dest_len + i] = src[i];
 	}
 	return (dest);
+}
+
+/**
+  * _strcmp - this compares teo strings
+  * @s1: this is one of the string to be compared
+  * @s2: thus is another one of the string to be compared
+  * Return: returns 0 if both strings are the same
+  * returns a positive value if s1 is greater than s2
+  * returns a negative value if s1 is less than s2
+  */
+
+int _strcmp(char *s1, char *s2)
+{
+	int i, cmp, s1_len = 0;
+
+	s1_len = _strlen(s1);
+
+	for (i = 0; i < s1_len; i++)
+	{
+		if (s1[i] != s2[i])
+		{
+			cmp = s1[i] - s2[i];
+			return (cmp);
+		}
+	}
+	return (0);
 }
