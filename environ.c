@@ -1,6 +1,10 @@
 #include "shell.h"
 
-
+/**
+  * _getenv - this gets the environment variable passed into it
+  * @name: this is the environment variable name
+  * Return: this returns the value of the environment variable
+  */
 char *_getenv(const char *name)
 {
 	char *var = NULL, *value;

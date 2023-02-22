@@ -1,39 +1,4 @@
 #include "shell.h"
-/**
-  * _strtok - this breaks a string in zero or more non-empty strings
-  * @str: this is the string to be split
-  * @delim: this is the separator between the strings to be split
-  * Return: On the first call, it returns the first split part
-  * on subsequent calls, NULL will be put in place of the str and it'll
-  * continue to return an newly broken string till it reaches the end of
-  * the intitial string passed
-  */
-char *_strtok(char *str, const char *delim)
-{
-	static char *buffer = NULL;
-	char *token;
-
-	if (buffer == NULL)
-	{
-		buffer = str;
-	}
-	if (*buffer == '\0')
-	{
-		return (NULL);
-	}
-
-	token = buffer;
-	while (*buffer != '\0' && *buffer != *delim)
-	{
-		buffer += 1;
-	}
-	if (buffer != NULL)
-	{
-		*buffer = '\0';
-		buffer += 1;
-	}
-	return (token);
-}
 
 /**
   * _strlen - this counts the number of characters present in a string
@@ -115,11 +80,11 @@ int _strcmp(char *s1, char *s2)
 	return (0);
 }
 /**
-  * _strdup - this function is used to duplicate a string 
-  * @s: this is the string that will be copied
-  * Return: this returns a pointer to the newly allocated string
-  * OR NULL if there's insufficient space
-  */
+ * _strdup - this function is used to duplicate a string
+ * @s: this is the string that will be copied
+ * Return: this returns a pointer to the newly allocated string
+ * OR NULL if there's insufficient space
+ */
 char *_strdup(const char *s)
 {
 	char *copy;
