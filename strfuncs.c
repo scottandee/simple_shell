@@ -55,7 +55,8 @@ size_t _strlen(const char *s)
 /**
   * _strcpy - this copies the content of src into dest
   * @src: this is the source string that will be copied
-  * @dest: this is the destination string in to which the content of src will be copied into
+  * @dest: this is the destination string into which
+  * the content of src will be copied into
   * Return: it returns a pointer to the destination string
   */
 char *_strcpy(char *dest, const char *src)
@@ -112,4 +113,24 @@ int _strcmp(char *s1, char *s2)
 		}
 	}
 	return (0);
+}
+/**
+  * _strdup - this function is used to duplicate a string 
+  * @s: this is the string that will be copied
+  * Return: this returns a pointer to the newly allocated string
+  * OR NULL if there's insufficient space
+  */
+char *_strdup(const char *s)
+{
+	char *copy;
+
+	copy = malloc(sizeof(char) * _strlen(s));
+	if (copy == NULL)
+	{
+		return (NULL);
+	}
+
+	copy = strcpy(copy, s);
+
+	return (copy);
 }
