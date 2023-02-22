@@ -34,18 +34,28 @@ int main(int argc, char **argv)
 				argv[0] = find_path(argv[0]);
 				execute(argv);
 			}
+			
+			freeArray(argv);
+			free(buffer);
 		}
 		if (read == -1)
 		{
-			free(buffer);
 			break;
 		}
 
 
 	}
-	free(argv);
-	free(buffer);
 	return (0);
 
 }
 
+void freeArray(char **arr)
+{
+	int i;
+
+	for (i = 0; arr[i]; i++)
+	{
+		free(arr[i]);
+	}
+	free(arr);
+}
