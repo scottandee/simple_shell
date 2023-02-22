@@ -11,6 +11,7 @@
 
 extern char **environ;
 int execute(char **args);
+char *read_input();
 int exit_shell(char **args);
 int print_env(char **args);
 char *_strtok(char *str, const char *delim);
@@ -19,7 +20,7 @@ int get_builtin_func(char **args);
 void freeArray(char **arr);
 char *_strcpy(char *dest, const char *src);
 size_t _strlen(const char *s);
-char **token_gen(char *buffer, char *delim);
+char **token_gen(int *argc, char *buffer, char *delim);
 char *_getenv(const char *name);
 char *_strdup(const char *s);
 char *find_path(char *command);

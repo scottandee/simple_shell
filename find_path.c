@@ -14,7 +14,7 @@ char *find_path(char *command)
 
 	if (stat(command, &st) == 0)
 		return (command);
-	path = _getenv("PATH");
+	path = getenv("PATH");
 	path_copy = _strdup(path);
 	i = 0;
 	while (*(path_copy + i) != '\0')

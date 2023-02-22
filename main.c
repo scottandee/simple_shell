@@ -7,43 +7,23 @@
   */
 int main(int argc, char **argv)
 {
-	size_t size = 0;
-	char *buffer = NULL;
-	ssize_t read;
 	int status = 1, built;
-	char *dollar;
-
-	dollar = "$ ";
-	(void)argc;
-	(void)argv;
 
 	while (status)
 	{
-		write(STDOUT_FILENO, dollar, 2);
-		read = getline(&buffer, &size, stdin);
-		if (read != -1)
+		char *input = read_input();
+		argc = 0;
+		argv = token_gen(&argc, input, " \n");
+		built = get_builtin_func(argv);
+		if (built == 0)
 		{
-			argv = token_gen(buffer, " \n");
-			built = get_builtin_func(argv);
-			if (built == 0)
-			{
-				status = 0;
-			}
-			if (built == -1)
-			{
-				argv[0] = find_path(argv[0]);
-				execute(argv);
-			}
-			
-			freeArray(argv);
-			free(buffer);
+			status = 0;
 		}
-		if (read == -1)
+		if (built == -1)
 		{
-			break;
+			argv[0] = find_path(argv[0]);
+			execute(argv);
 		}
-
-
 	}
 	return (0);
 
@@ -58,4 +38,21 @@ void freeArray(char **arr)
 		free(arr[i]);
 	}
 	free(arr);
+}
+
+char *read_input()
+{
+	size_t size = 0;
+	char *buffer = malloc(size * sizeof(char));
+	char *dollar = "$ ";
+	int read;
+
+	write(STDOUT_FILENO, dollar, 2);
+	read = getline(&buffer, &size, stdin);
+	if (read == -1)
+	{
+		free(buffer);
+		return(NULL);
+	}
+	return (buffer);
 }

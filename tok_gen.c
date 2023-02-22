@@ -7,23 +7,23 @@
   * @delim: this is the separator between each word to be split
   * Return: returns an array of each word of the buffer
   */
-char **token_gen(char *buffer, char *delim)
+char **token_gen(int *argc, char *buffer, char *delim)
 {
 	char **split_string = NULL;
-	int i = 0, j, token_num = 0;
+	int i = 0, j;
 	char *str = malloc(sizeof(char) * strlen(buffer)), *token;
 
 	_strcpy(str, buffer);
 	while (str[i] != '\0')
 	{
 		if (*(str + i) == ' ')
-			token_num++;
+			(*argc)++;
 		i++;
 	}
-	token_num++;
-	split_string = malloc(sizeof(char *) * (token_num + 1));
+	(*argc)++;
+	split_string = malloc(sizeof(char *) * ((*argc) + 1));
 
-	for (j = 0; j < token_num; j++)
+	for (j = 0; j < (*argc); j++)
 	{
 		if (j == 0)
 		{
@@ -39,6 +39,6 @@ char **token_gen(char *buffer, char *delim)
 		}
 	}
 	free(str);
-	split_string[token_num] = NULL;
+	split_string[(*argc)] = NULL;
 	return (split_string);
 }

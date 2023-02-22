@@ -13,7 +13,7 @@ int execute(char **args)
 	mypid = fork();
 	if (mypid == -1)
 	{
-		perror("./shell");
+		perror("./hsh");
 	}
 
 	if (mypid == 0)
@@ -21,7 +21,7 @@ int execute(char **args)
 		exe = execve(args[0], args, NULL);
 		if (exe == -1)
 		{
-			perror("./shell");
+			perror("./hsh");
 		}
 	}
 	else
