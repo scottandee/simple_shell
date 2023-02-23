@@ -34,13 +34,18 @@ char *read_input()
 		return (NULL);
 	}
 	free(buffer);
-	/*free(buffer_lead)*/;
 	return (buffer_lead);
 }
+/**
+  * removeLeading -  this removes the whitespaces in front of the command
+  * @str : this is the command passed
+  * Return: the trimmed string
+  */
 char *removeLeading(char *str)
 {
 	int idx = 0, j, k = 0;
 	char *edit = NULL;
+
 	while (str[idx] == ' ' || str[idx] == '\t' || str[idx] == '\n')
 	{
 		idx++;
@@ -54,6 +59,12 @@ char *removeLeading(char *str)
 	edit[k] = '\0';
 	return (edit);
 }
+/**
+  * removeLagging - this trims off the white space at the
+  * back of the command passed
+  * @str: this is the command passed
+  * Return: the trimmed command
+  */
 char *removeLagging(char *str)
 {
 	int idx = 0;
