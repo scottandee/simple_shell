@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 	while (status)
 	{
 		char *input = read_input();
-		argv = token_gen(input, " \t\r\n\a");
+		argv = token_gen(input, " \n");
 
 		built = get_builtin_func(argv);
 		if (built == 0)

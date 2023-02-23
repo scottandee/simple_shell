@@ -21,21 +21,21 @@ char *read_input()
 {
 	size_t size = 0;
 	char *buffer = malloc(size * sizeof(char));
-	char *dollar = "$ ", *buffer_lead, *buffer_lag;
+	char *dollar = "$ ", *buffer_lead;
 	int read;
 
 	write(STDOUT_FILENO, dollar, 2);
 	read = getline(&buffer, &size, stdin);
 	buffer_lead = removeLeading(buffer);
-	buffer_lag = removeLagging(buffer_lead);
+	/*buffer_lag = removeLagging(buffer_lead);*/
 	if (read == -1)
 	{
 		free(buffer);
 		return (NULL);
 	}
 	free(buffer);
-	free(buffer_lead);
-	return (buffer_lag);
+	/*free(buffer_lead)*/;
+	return (buffer_lead);
 }
 char *removeLeading(char *str)
 {
@@ -56,22 +56,15 @@ char *removeLeading(char *str)
 }
 char *removeLagging(char *str)
 {
-	int  idx = 0, j, k = 0;
-	char *edit = NULL;
+	int idx = 0;
+	char *edit;
+	size_t size = 0;
 
 	while (str[idx] != ' ' || str[idx] != '\t' || str[idx] != '\n')
 	{
 		idx++;
 	}
-	edit = malloc(sizeof(char) * idx);
-	for (j = 0; str[j] != '\0'; j++)
-	{
-		if (str[j] != ' ')
-		{
-			edit[k] = str[j];
-			k++;
-		}
-	}
-	edit[k] = '\0';
+	size = idx + 1;
+	edit = strndup(str, size);
 	return (edit);
 }
