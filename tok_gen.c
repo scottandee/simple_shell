@@ -5,7 +5,6 @@
   * array of each word of input
   * @buffer: this is the string to be split
   * @delim: this is the separator between each word to be split
-  * @argc: this is the number of times the strtok will work
   * Return: returns an array of each word of the buffer
   */
 char **token_gen(char *buffer, char *delim)

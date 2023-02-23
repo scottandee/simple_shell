@@ -13,6 +13,7 @@ int main(int argc, char **argv)
 	while (status)
 	{
 		char *input = read_input();
+
 		argv = token_gen(input, " \n");
 
 		built = get_builtin_func(argv);
@@ -25,8 +26,10 @@ int main(int argc, char **argv)
 			argv[0] = find_path(argv[0]);
 			execute(argv);
 		}
+		free(input);
+		free(argv);
 	}
-	freeArray(argv);
+	/*freeArray(argv);*/
 	return (0);
 }
 
