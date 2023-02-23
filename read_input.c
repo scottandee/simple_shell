@@ -23,8 +23,10 @@ char *read_input()
 	char *buffer = malloc(size * sizeof(char));
 	char *dollar = "$ ", *buffer_lead;
 	int read;
-
-	write(STDOUT_FILENO, dollar, 2);
+	if (isatty(STDIN_FILENO))
+	{
+		write(STDOUT_FILENO, dollar, 2);
+	}
 	read = getline(&buffer, &size, stdin);
 	buffer_lead = removeLeading(buffer);
 	/*buffer_lag = removeLagging(buffer_lead);*/

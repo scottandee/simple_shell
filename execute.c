@@ -10,6 +10,11 @@ int execute(char **args)
 	pid_t mypid;
 	int status, exe;
 
+	if (args[0] == NULL)
+	{
+		return (1);
+	}
+
 	mypid = fork();
 	if (mypid == -1)
 	{

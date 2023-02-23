@@ -13,6 +13,7 @@ extern char **environ;
 int execute(char **args);
 char *read_input();
 int exit_shell(char **args);
+int hsh_loop(void);
 char *removeLeading(char *str);
 char *removeLagging(char *str);
 void trimleadingandTrailing(char *s);
