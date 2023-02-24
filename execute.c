@@ -18,7 +18,8 @@ int execute(char **args)
 	mypid = fork();
 	if (mypid == -1)
 	{
-		perror("./hsh");
+		perror(args[0]);
+		return (1);
 	}
 
 	if (mypid == 0)
@@ -26,12 +27,13 @@ int execute(char **args)
 		exe = execve(args[0], args, NULL);
 		if (exe == -1)
 		{
-			perror("./hsh");
+			perror(args[0]);
+			return (0);
 		}
 	}
 	else
 	{
 		wait(&status);
 	}
-	return (1);
+	return (-1);
 }

@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 int hsh_loop(void)
 {
 	char *buffer = NULL;
-	int status = 1;/*, built*/
+	int status = 1; /*built;*/
 	size_t size = 0;
 	char *dollar = "$ ";
 	while (status)
@@ -54,17 +54,17 @@ int hsh_loop(void)
 		}
 		tokens[i] = NULL;
 		status = execute(tokens);
-		free(tokens);
-		/*built = get_builtin_func(argv);
+		/*built = get_builtin_func(tokens);
 		if (built == 0)
 		{
 			status = 0;
 		}
 		if (built == -1)
 		{
-			argv[0] = find_path(argv[0]);
-			execute(argv);
+			tokens[0] = find_path(tokens[0]);
+			status = execute(tokens);
 		}*/
+		free(tokens);
 	}
 	return (0);
 }
