@@ -21,12 +21,12 @@ int hsh_loop(void)
 	char *buffer = NULL;
 	int status = 1; /*built;*/
 	size_t size = 0;
-	char *dollar = "$ ";
 	while (status)
 	{
 		int i = 1;
 		ssize_t parsed = 0;
 		char *delim = " ";
+		char *dollar = "$ ";
 		char **tokens = malloc(1024 * sizeof(char *));
 		if (tokens == NULL)
 		{
@@ -35,7 +35,7 @@ int hsh_loop(void)
 		}
 		if (isatty(STDIN_FILENO))
 		{
-			write(STDOUT_FILENO, dollar, 2);
+			write(1, dollar, 2);
 		}
 		parsed = getline(&buffer, &size, stdin);
 		if (parsed == -1)
