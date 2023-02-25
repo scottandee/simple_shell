@@ -1,70 +1,73 @@
-#include "shell.h"
+#include "main.h"
+
 /**
-  * main - this is the entry point function
-  * @argc: this is the number of arguments passed
-  * @argv: this is a string of arguments passed
-  * Return: Always 0
-  */
-int main(int argc, char **argv)
+* free_data - frees data structure
+*
+* @datash: data structure
+* Return: no return
+*/
+void free_data(data_shell *datash)
 {
-	(void)argc;
-	(void)argv;
+	unsigned int i;
 
-	hsh_loop();
+	for (i = 0; datash->_environ[i]; i++)
+	{
+		free(datash->_environ[i]);
+	}
 
-	return (0);
+	free(datash->_environ);
+	free(datash->pid);
 }
 
-
-int hsh_loop(void)
+/**
+* set_data - Initialize data structure
+*
+* @datash: data structure
+* @av: argument vector
+* Return: no return
+*/
+void set_data(data_shell *datash, char **av)
 {
-	char *buffer = NULL;
-	int status = 1; /*built;*/
-	size_t size = 0;
-	while (status)
+	unsigned int i;
+
+	datash->av = av;
+	datash->input = NULL;
+	datash->args = NULL;
+	datash->status = 0;
+	datash->counter = 1;
+
+	for (i = 0; environ[i]; i++)
+		;
+
+	datash->_environ = malloc(sizeof(char *) * (i + 1));
+
+	for (i = 0; environ[i]; i++)
 	{
-		int i = 1;
-		ssize_t parsed = 0;
-		char *delim = " ";
-		char *dollar = "$ ";
-		char **tokens = malloc(1024 * sizeof(char *));
-		if (tokens == NULL)
-		{
-			free(tokens);
-			return (0);
-		}
-		if (isatty(STDIN_FILENO))
-		{
-			write(1, dollar, 2);
-		}
-		parsed = getline(&buffer, &size, stdin);
-		if (parsed == -1)
-		{
-			free(buffer);
-			free(tokens);
-			return (-1);
-		}
-		*(buffer + (_strlen(buffer) - 1)) = '\0';
-		tokens[0] = strtok(buffer, delim);
-		tokens[1] = "gb";
-		while (tokens[i])
-		{
-			tokens[i] = strtok(NULL, delim);
-			i++;
-		}
-		tokens[i] = NULL;
-		status = execute(tokens);
-		/*built = get_builtin_func(tokens);
-		if (built == 0)
-		{
-			status = 0;
-		}
-		if (built == -1)
-		{
-			tokens[0] = find_path(tokens[0]);
-			status = execute(tokens);
-		}*/
-		free(tokens);
+		datash->_environ[i] = _strdup(environ[i]);
 	}
-	return (0);
+
+	datash->_environ[i] = NULL;
+	datash->pid = aux_itoa(getpid());
+}
+
+/**
+* main - Entry point
+*
+* @ac: argument count
+* @av: argument vector
+*
+* Return: 0 on success.
+*/
+int main(int ac, char **av)
+{
+	data_shell datash;
+	(void) ac;
+
+	signal(SIGINT, get_sigint);
+	set_data(&datash, av);
+	shell_loop(&datash);
+	free_data(&datash);
+	if (datash.status < 0)
+		return (255);
+	return (datash.status);
 }
