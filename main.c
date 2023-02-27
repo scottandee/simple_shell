@@ -65,6 +65,6 @@ int hsh_loop(void)
 			status = execute(tokens);
 		}*/
 		free(tokens);
-	}while (status)
+	}while (status);
 	return (0);
 }

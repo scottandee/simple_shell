@@ -2,6 +2,11 @@
 #define _SHELL_H_
 
 #include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 
 size_t _strlen(const char *s);
@@ -14,6 +19,6 @@ char *_strtok(char *str, const char *delim);
 int hsh_loop(void);
 int execute(char **args);
 
-
+extern char **environ;
 
 #endif /*_SHELL_H_*/
