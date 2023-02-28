@@ -8,10 +8,17 @@ int hsh_loop(void)
 	
 	while (status)
 	{
+		int i = 1;
 		ssize_t parsed = 0;
 		char *delim = " ";
 		char *dollar = "$ ";
-		char **tokens = calloc(1024, sizeof(char *)); 
+		char **tokens = calloc(1024, sizeof(char *));
+
+		if (tokens == NULL)
+		{
+			free(tokens);
+			return (0);
+		}
 
 		if (isatty(STDIN_FILENO))
 		{
@@ -25,7 +32,14 @@ int hsh_loop(void)
 			return (-1);
 		}
 		*(buffer + (_strlen(buffer) - 1)) = '\0';
-		tokens = token_gen(buffer, delim);
+		tokens[0] = strtok(buffer, delim);
+		tokens[1] = "gb";
+		while (tokens[i])
+		{
+			tokens[i] = strtok(NULL, delim);
+			i++;
+		}
+		tokens[i] = NULL;
 		status = execute(tokens);
 		free(tokens);
 	}
