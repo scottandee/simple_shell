@@ -18,6 +18,7 @@ char *_strtok(char *str, const char *delim);
 
 int hsh_loop(void);
 int execute(char **args);
+char **token_gen(char *buffer, char *delim);
 
 extern char **environ;
 

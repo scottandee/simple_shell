@@ -24,7 +24,7 @@ int execute(char **args)
 
 	if (mypid == 0)
 	{
-		exe = execve(args[0], args, environ);
+		exe = execve(args[0], args, NULL);
 		if (exe == -1)
 		{
 			perror(args[0]);
