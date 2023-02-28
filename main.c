@@ -15,16 +15,3 @@ int main(int argc, char **argv)
 	return (0);
 }
 
-
-
-		/*built = get_builtin_func(tokens);
-		if (built == 0)
-		{
-			status = 0;
-		}
-		if (built == -1)
-		{
-			tokens[0] = find_path(tokens[0]);
-			status = execute(tokens);
-		}*/
-	

@@ -10,7 +10,7 @@ int hsh_loop(void)
 	{
 		int i = 1;
 		ssize_t parsed = 0;
-		char *delim = " ";
+		char *delim = " ", built;
 		char *dollar = "$ ";
 		char **tokens = calloc(1024, sizeof(char *));
 
@@ -40,7 +40,16 @@ int hsh_loop(void)
 			i++;
 		}
 		tokens[i] = NULL;
-		status = execute(tokens);
+		built = get_builtin_func(tokens);
+		if (built == 0)
+		{
+			status = 0;
+		}
+		if (built == -1)
+		{
+			tokens[0] = find_path(tokens[0]);
+			status = execute(tokens);
+		}
 		free(tokens);
 	}
 	return (0);
