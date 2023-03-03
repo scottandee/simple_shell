@@ -10,11 +10,11 @@
 #include <sys/wait.h>
 
 
-size_t _strlen(const char *s);
-char *_strcpy(char *dest, const char *src);
-char *_strcat(char *dest, const char *src);
+int _strlen(char *s);
+char *_strcpy(char *dest, char *src);
+char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
-char *_strdup(const char *s);
+char *_strdup(char *s);
 char *_strtok(char *str, const char *delim);
 
 

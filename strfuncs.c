@@ -5,17 +5,17 @@
   * @s: this is the string to be counted
   * Return: it returns the length of the string
   */
-size_t _strlen(const char *s)
+int _strlen(char *s)
 {
-	size_t len = 0;
-	int i = 0;
+	int i;
 
-	while (s[i] != '\0')
+	i = 0;
+
+	while (*(s + i) != '\0')
 	{
-		len++;
 		i++;
 	}
-	return (len);
+	return (i);
 }
 /**
   * _strcpy - this copies the content of src into dest
@@ -24,33 +24,43 @@ size_t _strlen(const char *s)
   * the content of src will be copied into
   * Return: it returns a pointer to the destination string
   */
-char *_strcpy(char *dest, const char *src)
+char *_strcpy(char *dest, char *src)
 {
-	int i = 0;
+	int i, length = 0;
 
-	while (src[i] != '\0')
+	while (*(src + length) != '\0')
+	{
+		length++;
+	}
+	for (i = 0; i <= length; i++)
 	{
 		dest[i] = src[i];
-		i++;
 	}
 	return (dest);
 }
-
 /**
   * _strcat - this appends the contents of src to destination
   * @src: this is the string that will be copied from
   * @dest: this is the string that will be appended to
   * Return: this returns a pointer to the concatenated string
   */
-char *_strcat(char *dest, const char *src)
+char *_strcat(char *dest, char *src)
 {
-	int i;
-	int src_len = _strlen(src), dest_len = _strlen(dest);
+	int i, src_length = 0, dest_length = 0;
 
-	for (i = 0; i < src_len; i++)
+	while (src[src_length] != '\0')
 	{
-		dest[dest_len + i] = src[i];
+		src_length++;
 	}
+	while (dest[dest_length] != '\0')
+	{
+		dest_length++;
+	}
+	for (i = 0; i < src_length; i++)
+	{
+		dest[dest_length + i] = src[i];
+	}
+	dest[dest_length + i] = '\0';
 	return (dest);
 }
 
@@ -85,17 +95,27 @@ int _strcmp(char *s1, char *s2)
  * Return: this returns a pointer to the newly allocated string
  * OR NULL if there's insufficient space
  */
-char *_strdup(const char *s)
+char *_strdup(char *s)
 {
 	char *copy;
+	int len = _strlen(s), i;
+	
+	if (s == NULL)
+	{
+		return (NULL);
+	}
 
-	copy = malloc(sizeof(char) * _strlen(s));
+	copy = malloc(sizeof(char) * (len + 1));
 	if (copy == NULL)
 	{
 		return (NULL);
 	}
 
-	copy = strcpy(copy, s);
+	for (i = 0; i < len; i++)
+	{
+		copy[i] = s[i];
+	}
+	copy[len] = '\0';
 
 	return (copy);
 }
