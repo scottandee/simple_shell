@@ -32,11 +32,11 @@ int hsh_loop(void)
 			return (-1);
 		}
 		*(buffer + (_strlen(buffer) - 1)) = '\0';
-		tokens[0] = strtok(buffer, delim);
+		tokens[0] = _strtok(buffer, delim);
 		tokens[1] = "gb";
 		while (tokens[i])
 		{
-			tokens[i] = strtok(NULL, delim);
+			tokens[i] = _strtok(NULL, delim);
 			i++;
 		}
 		tokens[i] = NULL;
