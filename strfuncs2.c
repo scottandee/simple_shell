@@ -13,25 +13,41 @@ char *_strtok(char *str, const char *delim)
 {
 	static char *buffer;
 	char *token;
+	int i, len = strlen(delim);
 
-	if (buffer == NULL)
-	{
-		buffer = str;
-	}
-	if (*buffer == '\0')
+	if (!delim)
 	{
 		return (NULL);
 	}
+	if (str)
+	{
+		buffer = str;
+	}
+	else
+		if (!buffer || !*buffer)
+		{
+			return (NULL);
+		}
 
 	token = buffer;
-	while (*buffer != '\0' && *buffer != *delim)
+	while (*buffer != '\0' && i != len) 
 	{
-		buffer += 1;
-	}
-	if (buffer != NULL)
-	{
-		*buffer = '\0';
-		buffer += 1;
+		i = 0;
+		while (*buffer && *buffer != *delim)
+		{
+			buffer += 1;
+		}
+		while (buffer[i] == delim[i] && i < len)
+		{
+			i += 1;
+		}
+		if (i == len)
+		{
+			*buffer = 0;
+			buffer += len;
+		}
+		else
+			buffer += 1;
 	}
 	return (token);
 }
