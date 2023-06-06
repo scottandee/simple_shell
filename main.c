@@ -1,8 +1,7 @@
 #include "shell.h"
+
 /**
   * main - this is the entry point function
-  * @argc: this is the number of arguments passed
-  * @argv: this is a string of arguments passed
   * Return: Always 0
   */
 int main(void)
@@ -11,7 +10,7 @@ int main(void)
 	int argc, built = 0;
 	char **tokens;
 
-	while(1)
+	while (1)
 	{
 		argc = 0;
 		tokens = NULL;
@@ -37,5 +36,5 @@ int main(void)
 
 		free_tokens(tokens, argc);
 	}
-	return(0);
+	return (0);
 }

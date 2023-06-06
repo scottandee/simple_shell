@@ -99,7 +99,7 @@ char *_strdup(char *s)
 {
 	char *copy;
 	int len = _strlen(s), i;
-	
+
 	if (s == NULL)
 	{
 		return (NULL);

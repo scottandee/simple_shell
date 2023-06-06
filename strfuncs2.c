@@ -30,7 +30,7 @@ char *_strtok(char *str, const char *delim)
 		}
 	buffer = NULL;
 	token = buffer;
-	while (*buffer != '\0' && i != len) 
+	while (*buffer != '\0' && i != len)
 	{
 		i = 0;
 		while (*buffer && *buffer != *delim)
