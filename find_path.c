@@ -27,13 +27,9 @@ char *find_path(char *command)
 	for (i = 0; i < count; i++)
 	{
 		if (i == 0)
-		{
 			token = strtok(path_copy, ":");
-		}
 		else
-		{
 			token = strtok(NULL, ":");
-		}
 		temp = malloc(sizeof(char) * (_strlen(command) + _strlen(token) + 2));
 		_strcpy(temp, token);
 		_strcat(temp, "/");
@@ -44,7 +40,8 @@ char *find_path(char *command)
 			free(path_copy);
 			return (temp);
 		}
+		free(temp);
 	}
 	free(path_copy);
-	return (NULL);
+	return (command);
 }

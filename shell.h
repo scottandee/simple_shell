@@ -17,11 +17,11 @@ int _strcmp(char *s1, char *s2);
 char *_strdup(char *s);
 char *_strtok(char *str, const char *delim);
 
-
-int hsh_loop(void);
+char *read_input(void);
+void free_tokens(char **tokens, int argc);
+char **split_input(char *input_text, int *argc);
 int execute(char **args);
 char *_getenv(const char *name);
-char **token_gen(char *buffer, char *delim);
 int get_builtin_func(char **args);
 char *find_path(char *command);
 

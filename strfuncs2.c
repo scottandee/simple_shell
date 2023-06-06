@@ -28,7 +28,7 @@ char *_strtok(char *str, const char *delim)
 		{
 			return (NULL);
 		}
-
+	buffer = NULL;
 	token = buffer;
 	while (*buffer != '\0' && i != len) 
 	{
