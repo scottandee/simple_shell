@@ -30,7 +30,10 @@ char *read_input(void)
 	size_t size = 0;
 	ssize_t char_read;
 
-	write(STDOUT_FILENO, "$ ", 2);
+	if (isatty(STDIN_FILENO) == 1)
+	{
+		write(STDOUT_FILENO, "$ ", 2);
+	}
 	char_read = getline(&buffer, &size, stdin);
 	if (char_read == -1)
 	{
