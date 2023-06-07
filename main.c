@@ -6,7 +6,7 @@
   */
 int main(void)
 {
-	char *input_text;
+	char *input_text, *buffer = NULL;
 	int argc, built = 0;
 	char **tokens;
 
@@ -30,7 +30,12 @@ int main(void)
 		built = get_builtin_func(tokens);
 		if (built == -1)
 		{
+			buffer = tokens[0];
 			tokens[0] = find_path(tokens[0]);
+			if (_strcmp(tokens[0], buffer) != 0)
+			{
+				free(buffer);
+			}
 			execute(tokens);
 		}
 

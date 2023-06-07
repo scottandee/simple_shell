@@ -49,4 +49,3 @@ char **split_input(char *input_text, int *argc)
 	free(copy);
 	return (arr);
 }
-
