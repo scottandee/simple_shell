@@ -8,11 +8,9 @@
 int get_builtin_func(char **args)
 {
 	char *builtin_str[] = {
-		"exit",
 		"env"
 	};
 	int (*builtin_func[]) (char **) = {
-		&exit_shell,
 		&print_env
 	};
 	int i;

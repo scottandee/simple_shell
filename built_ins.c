@@ -1,17 +1,6 @@
 #include "shell.h"
 
 /**
-  * exit_shell - print_env
-  * @args: this is the array of split strings passed by the user
-  * Return: 0 on succcess
-  */
-
-int exit_shell(char **args)
-{
-	(void)args;
-	return (0);
-}
-/**
   * print_env - this prints out all the environment variables
   * @args: this is the array of split strings passed by the user
   * Return: 0 on success
