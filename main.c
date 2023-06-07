@@ -9,8 +9,9 @@ int main(void)
 	char *input_text, *buffer = NULL;
 	int argc, built = 0;
 	char **tokens;
+	int status = 1;
 
-	while (1)
+	while (status)
 	{
 		argc = 0;
 		tokens = NULL;
@@ -36,7 +37,7 @@ int main(void)
 			{
 				free(buffer);
 			}
-			execute(tokens);
+			status = execute(tokens);
 		}
 
 		free_tokens(tokens, argc);
