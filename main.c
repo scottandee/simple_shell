@@ -21,7 +21,7 @@ int main(void)
 			return (1);
 		}
 		tokens = split_input(input_text, &argc);
-		if (strcmp(tokens[0], "exit") == 0 && argc == 1)
+		if (_strcmp(tokens[0], "exit") == 0 && argc == 1)
 		{
 			free_tokens(tokens, argc);
 			return (0);
