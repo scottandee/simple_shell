@@ -16,10 +16,15 @@ int main(void)
 		argc = 0;
 		tokens = NULL;
 		input_text = read_input();
-		if (input_text == NULL || strcmp(input_text, "\n") == 0)
+		if (input_text == NULL)
 		{
 			free(input_text);
 			return (1);
+		}
+		if (strcmp(strtok(input_text, " "), "\n") == 0)
+		{
+			free(input_text);
+			continue;
 		}
 		tokens = split_input(input_text, &argc);
 		if (_strcmp(tokens[0], "exit") == 0 && argc == 1)
