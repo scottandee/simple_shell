@@ -15,6 +15,10 @@ char *find_path(char *command)
 	if (stat(command, &st) == 0)
 		return (command);
 	path = getenv("PATH");
+	if (strcmp(path, "") == 0 || path == NULL)
+	{
+		return (command);
+	}
 	path_copy = _strdup(path);
 	i = 0;
 	while (*(path_copy + i) != '\0')
