@@ -8,7 +8,7 @@
 int main(void)
 {
 	char *input_text, *copy, **tokens;
-	int argc, i = 0, built = 0, status = 1;
+	int argc, built = 0, status = 1;
 
 	while (status)
 	{
