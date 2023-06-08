@@ -16,7 +16,7 @@ char **split_input(char *input_text, int *argc)
 	int i = 0;
 	char **arr;
 
-	copy = malloc(sizeof(char) * (strlen(input_text) + 1));
+	copy = malloc(sizeof(char) * (_strlen(input_text) + 1));
 	_strcpy(copy, input_text);
 
 	(*argc) = 0;
@@ -35,13 +35,13 @@ char **split_input(char *input_text, int *argc)
 	arr = malloc(((*argc) + 1) * sizeof(char *));
 
 	p = strtok(copy, " \n");
-	arr[i] = malloc(sizeof(char) * (strlen(p) + 1));
+	arr[i] = malloc(sizeof(char) * (_strlen(p) + 1));
 	_strcpy(arr[i], p);
 
 	for (i = 1; i < (*argc); i++)
 	{
 		p = strtok(NULL, " \n");
-		arr[i] = malloc(sizeof(char) * (strlen(p) + 1));
+		arr[i] = malloc(sizeof(char) * (_strlen(p) + 1));
 		_strcpy(arr[i], p);
 	}
 	arr[(*argc)] = NULL;

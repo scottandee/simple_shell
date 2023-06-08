@@ -4,12 +4,11 @@
   * main - this is the entry point function
   * Return: Always 0
   */
+
 int main(void)
 {
-	char *input_text, *buffer = NULL;
-	int argc, built = 0;
-	char **tokens;
-	int status = 1;
+	char *input_text, *copy, **tokens;
+	int argc, i = 0, built = 0, status = 1;
 
 	while (status)
 	{
@@ -21,30 +20,25 @@ int main(void)
 			free(input_text);
 			break;
 		}
-		if (strcmp(strtok(input_text, " "), "\n") == 0)
+		copy = malloc(sizeof(char) * (strlen(input_text) + 1));
+		strcpy(copy, input_text);
+		if (strcmp(strtok(copy, " "), "\n") == 0)
 		{
 			free(input_text);
 			continue;
 		}
+		free(copy);
 		tokens = split_input(input_text, &argc);
 		if (_strcmp(tokens[0], "exit") == 0 && argc == 1)
 		{
 			free_tokens(tokens, argc);
 			return (0);
 		}
-
 		built = get_builtin_func(tokens);
 		if (built == -1)
 		{
-			buffer = tokens[0];
-			tokens[0] = find_path(tokens[0]);
-			if (_strcmp(tokens[0], buffer) != 0)
-			{
-				free(buffer);
-			}
 			status = execute(tokens);
 		}
-
 		free_tokens(tokens, argc);
 	}
 	return (0);

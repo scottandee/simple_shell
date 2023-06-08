@@ -9,6 +9,7 @@ int execute(char **args)
 {
 	pid_t mypid;
 	int status, exe;
+	char *command;
 
 	if (args[0] == NULL)
 	{
@@ -24,7 +25,8 @@ int execute(char **args)
 
 	if (mypid == 0)
 	{
-		exe = execve(args[0], args, environ);
+		command = find_path(args[0]);
+		exe = execve(command, args, environ);
 		if (exe == -1)
 		{
 			perror(args[0]);
