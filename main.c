@@ -19,7 +19,7 @@ int main(void)
 		if (input_text == NULL)
 		{
 			free(input_text);
-			return (1);
+			break;
 		}
 		if (strcmp(strtok(input_text, " "), "\n") == 0)
 		{
