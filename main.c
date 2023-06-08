@@ -20,10 +20,11 @@ int main(void)
 			free(input_text);
 			break;
 		}
-		copy = malloc(sizeof(char) * (strlen(input_text) + 1));
+		copy = malloc(sizeof(char) * (_strlen(input_text) + 1));
 		strcpy(copy, input_text);
-		if (strcmp(strtok(copy, " "), "\n") == 0)
+		if (strtok(copy, " \n") == NULL)
 		{
+			free(copy);
 			free(input_text);
 			continue;
 		}
