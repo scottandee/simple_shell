@@ -5,28 +5,25 @@
   * @name: this is the environment variable name
   * Return: this returns the value of the environment variable
   */
-char *_getenv(const char *name)
+char *_getenv(char *name)
 {
-	char *var = NULL, *value;
-	char *copy = NULL;
+	char *var, *value, *current, *val;
 	int i;
-
-	copy = strdup(name);
 
 	i = 0;
 	while (*(environ + i) != NULL)
 	{
-		var = strtok(environ[i], "=");
+		current = _strdup(*(environ + i));
+		var = strtok(current, "=");
 		value = strtok(NULL, "=");
-		if (_strcmp(var, copy) == 0)
+		val = _strdup(value);
+		if (_strcmp(var, name) == 0)
 		{
-			free(copy);
-			return (value);
+			free(current);
+			return (val);
 		}
+		free(current);
 		i++;
 	}
-	free(copy);
 	return (NULL);
 }
-
-

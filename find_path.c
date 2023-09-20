@@ -14,7 +14,7 @@ char *find_path(char *command)
 
 	if (stat(command, &st) == 0)
 		return (command);
-	path = getenv("PATH");
+	path = _getenv("PATH");
 	if (strcmp(path, "") == 0 || path == NULL)
 	{
 		return (command);

@@ -21,7 +21,7 @@ char *read_input(void);
 void free_tokens(char **tokens, int argc);
 char **split_input(char *input_text, int *argc);
 int execute(char **args);
-char *_getenv(const char *name);
+char *_getenv(char *name);
 int get_builtin_func(char **args);
 char *find_path(char *command);
 
