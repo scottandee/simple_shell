@@ -16,6 +16,7 @@ char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *s);
 char *_strtok(char *str, const char *delim);
+int _atoi(char *s);
 
 char *read_input(void);
 void free_tokens(char **tokens, int argc);

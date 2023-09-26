@@ -19,3 +19,34 @@ int print_env(char **args)
 	}
 	return (1);
 }
+
+/**
+  * exit_shell - This exits the shell with a specified parameter
+  *
+  * @args: This is the array of split strings passed by the user
+  * Return: The value of exit status passed
+  */
+int exit_shell(char **args)
+{
+	int status;
+
+	if (_strcmp(args[1], "0") == 0)
+	{
+		return (0);
+	}
+
+	status = atoi(args[1]);
+	if (status == 0)
+	{
+		perror(args[1]);
+	}
+	else if (status > 255)
+	{
+		return (status % 256);
+	}
+	else
+	{
+		return (status);
+	}
+	return (-1);
+}

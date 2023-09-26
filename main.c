@@ -32,7 +32,8 @@ int main(void)
 		tokens = split_input(input_text, &argc);
 		if (_strcmp(tokens[0], "exit") == 0)
 		{
-			/*status = exit_shell(tokens);*/
+			if (argc == 2)
+				status = exit_shell(tokens);
 			free_tokens(tokens, argc);
 			return (status);
 		}
