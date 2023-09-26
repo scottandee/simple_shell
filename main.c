@@ -8,7 +8,7 @@
 int main(void)
 {
 	char *input_text, *copy, **tokens;
-	int argc, built = 0, status = 1;
+	int argc, built = 0, status = 0;
 
 	while (1)
 	{
@@ -34,7 +34,7 @@ int main(void)
 		{
 			/*status = exit_shell(tokens);*/
 			free_tokens(tokens, argc);
-			return(status);
+			return (status);
 		}
 		built = get_builtin_func(tokens);
 		if (built == -1)
