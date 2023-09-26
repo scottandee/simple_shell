@@ -10,7 +10,7 @@ int main(void)
 	char *input_text, *copy, **tokens;
 	int argc, built = 0, status = 1;
 
-	while (status)
+	while (1)
 	{
 		argc = 0;
 		tokens = NULL;
@@ -30,10 +30,11 @@ int main(void)
 		}
 		free(copy);
 		tokens = split_input(input_text, &argc);
-		if (_strcmp(tokens[0], "exit") == 0 && argc == 1)
+		if (_strcmp(tokens[0], "exit") == 0)
 		{
+			/*status = exit_shell(tokens);*/
 			free_tokens(tokens, argc);
-			return (0);
+			return(status);
 		}
 		built = get_builtin_func(tokens);
 		if (built == -1)

@@ -1,4 +1,6 @@
 #include "shell.h"
+
+int last_command_exit_status = 0;
 /**
   * execute - this runs the command passed into it
   * @args: this is an array of strings through which the command is passed
@@ -30,12 +32,13 @@ int execute(char **args)
 		if (exe == -1)
 		{
 			perror(args[0]);
-			return (0);
+			exit(2);
 		}
 	}
 	else
 	{
 		wait(&status);
+		last_command_exit_status = WEXITSTATUS(status);
 	}
-	return (-1);
+	return (last_command_exit_status);
 }

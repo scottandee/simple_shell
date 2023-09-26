@@ -26,6 +26,7 @@ int get_builtin_func(char **args);
 char *find_path(char *command);
 
 extern char **environ;
+extern int last_command_exit_status;
 
 int exit_shell(char **args);
 int print_env(char **args);
