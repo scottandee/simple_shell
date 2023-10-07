@@ -81,6 +81,5 @@ int _atoi(char *s)
 		i++;
 	}
 	result = result * sign;
-
 	return (result);
 }

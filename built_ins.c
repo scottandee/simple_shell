@@ -35,10 +35,11 @@ int exit_shell(char **args)
 		return (0);
 	}
 
-	status = atoi(args[1]);
-	if (status == 0)
+	status = _atoi(args[1]);
+	if (status == 0 || status < 0)
 	{
-		perror(args[1]);
+		fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", args[1]);
+		return (2);
 	}
 	else if (status > 255)
 	{
