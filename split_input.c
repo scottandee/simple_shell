@@ -49,3 +49,43 @@ char **split_input(char *input_text, int *argc)
 	free(copy);
 	return (arr);
 }
+
+char **commands(char *input_text)
+{
+	char *copy, *p;
+	int i = 0, argc;
+	char **arr;
+
+	copy = malloc(sizeof(char) * (_strlen(input_text) + 1));
+	_strcpy(copy, input_text);
+
+	argc = 0;
+	p = strtok(input_text, ";");
+	argc++;
+
+	while (p != NULL)
+	{
+		p = strtok(NULL, ";");
+		if (p != NULL)
+		{
+			argc++;
+		}
+	}
+
+	arr = malloc((argc + 1) * sizeof(char *));
+
+	p = strtok(copy, ";");
+	arr[i] = malloc(sizeof(char) * (_strlen(p) + 1));
+	_strcpy(arr[i], p);
+
+	for (i = 1; i < argc; i++)
+	{
+		p = strtok(NULL, ";");
+		arr[i] = malloc(sizeof(char) * (_strlen(p) + 1));
+		_strcpy(arr[i], p);
+	}
+	arr[argc] = NULL;
+	free(input_text);
+	free(copy);
+	return (arr);
+}

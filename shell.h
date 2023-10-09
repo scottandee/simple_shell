@@ -38,6 +38,7 @@ char *_getenv(char *name);
 int _setenv(char *name, char *value);
 int _unsetenv(char *name);
 int get_builtin_func(char **args);
+char **commands(char *input_text);
 char *find_path(char *command);
 
 envi_t *add_env_end(envi_t **head, char *name, char *value);

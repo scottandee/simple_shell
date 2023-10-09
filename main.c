@@ -9,8 +9,8 @@
 envi_t *envi = NULL;
 int main(void)
 {
-	char *input_text, *copy, **tokens;
-	int argc, built = 0, status = 0;
+	char *input_text, *copy, **tokens, **coms;
+	int argc, built = 0, status = 0, i = 0;
 	envi_t *head = build_env_list();
 	envi = head;
 
@@ -33,21 +33,28 @@ int main(void)
 			continue;
 		}
 		free(copy);
-		tokens = split_input(input_text, &argc);
-		if (_strcmp(tokens[0], "exit") == 0)
+		coms = commands(input_text);
+		i = 0;
+		while (coms[i] != NULL)
 		{
-			if (argc == 2)
-				status = exit_shell(tokens);
+			tokens = split_input(coms[i], &argc);
+			if (_strcmp(tokens[0], "exit") == 0)
+			{
+				if (argc == 2)
+					status = exit_shell(tokens);
+				free_tokens(tokens, argc);
+				free_env_list();
+				return (status);
+			}
+			built = get_builtin_func(tokens);
+			if (built == -1)
+			{
+				status = execute(tokens);
+			}
 			free_tokens(tokens, argc);
-			free_env_list();
-			return (status);
+			i++;
 		}
-		built = get_builtin_func(tokens);
-		if (built == -1)
-		{
-			status = execute(tokens);
-		}
-		free_tokens(tokens, argc);
+		free(coms);
 	}
 	free_env_list();
 	return (0);
