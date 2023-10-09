@@ -122,6 +122,7 @@ int change_dir(char **args)
 {
 	int count = 0, status, size = 1024;
 	char *cwd, *env, *old_pwd;
+	struct passwd *pw = getpwuid(getuid());
 
 	while (args[count] != NULL)
 		count++;
@@ -129,7 +130,10 @@ int change_dir(char **args)
 	if (count == 1)
 	{
 		env = _getenv("HOME");
-		status = chdir(env);
+		if (env == NULL)
+			status = chdir(pw->pw_dir);
+		else
+			status = chdir(env);
 	}
 	if (count == 2)
 	{
