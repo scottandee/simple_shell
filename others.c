@@ -43,4 +43,52 @@ char *read_input(void)
 	return (buffer);
 }
 
+/**
+  * free_env_list - Free up the single linked list containing
+  * environment variables
+  */
+
+void free_env_list(void)
+{
+	envi_t *temp;
+
+	if (envi == NULL)
+	{
+		return;
+	}
+	while (envi != NULL)
+	{
+		temp = envi->next;
+		free(envi->name);
+		free(envi->value);
+		free(envi);
+		envi = temp;
+	}
+}
+
+/**
+  * remove_env_list - Remove an environment variable from
+  * singly linked list
+  * @name: Name of the variable to be removed
+  * Return: 0 on success
+  */
+int remove_env_list(char *name)
+{
+	envi_t *head = envi, *temp;
+
+	while (head != NULL)
+	{
+		if (_strcmp(head->next->name, name) == 0)
+		{
+			temp = head->next;
+			head->next = head->next->next;
+			free(temp->name);
+			free(temp->value);
+			free(temp);
+			break;
+		}
+		head = head->next;
+	}
+	return (0);
+}
 

@@ -8,13 +8,18 @@
 int print_env(char **args)
 {
 	int i = 0;
+	envi_t *head;
 	char *new_line = "\n";
 	(void)args;
 
-	while (*(environ + i) != NULL)
+	head = envi;
+	while (head != NULL)
 	{
-		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
+		write(STDOUT_FILENO, head->name, _strlen(head->name));
+		write(STDOUT_FILENO, "=", 1);
+		write(STDOUT_FILENO, head->value, _strlen(head->value));
 		write(STDOUT_FILENO, new_line, 1);
+		head = head->next;
 		i++;
 	}
 	return (1);
@@ -50,4 +55,58 @@ int exit_shell(char **args)
 		return (status);
 	}
 	return (-1);
+}
+
+/**
+  * set_environ - Set an environment variable
+  *
+  * @args: This is the array of split strings passed by the user
+  * Return: 0 on success, 1 on error
+  */
+
+int set_environ(char **args)
+{
+	int i = 0;
+
+	while (args[i] != NULL)
+	{
+		i++;
+	}
+	if (i != 3)
+	{
+		fprintf(stderr, "Usage: setenv VARIABLE VALUE\n");
+		return (1);
+	}
+	if (_setenv(args[1], args[2]) == -1)
+	{
+		return (1);
+	}
+	return (0);
+}
+
+/**
+  * unset_environ - Unset an environment variable
+  *
+  * @args: This is the array of split strings passed by the user
+  * Return: 0 on success, 1 on error
+  */
+
+int unset_environ(char **args)
+{
+	int i = 0;
+
+	while (args[i] != NULL)
+	{
+		i++;
+	}
+	if (i != 2)
+	{
+		fprintf(stderr, "Usage: unsetenv VARIABLE\n");
+		return (1);
+	}
+	if (_unsetenv(args[1]) == -1)
+	{
+		return (1);
+	}
+	return (0);
 }

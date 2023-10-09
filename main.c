@@ -5,10 +5,14 @@
   * Return: Always 0
   */
 
+
+envi_t *envi = NULL;
 int main(void)
 {
 	char *input_text, *copy, **tokens;
 	int argc, built = 0, status = 0;
+	envi_t *head = build_env_list();
+	envi = head;
 
 	while (1)
 	{
@@ -35,6 +39,7 @@ int main(void)
 			if (argc == 2)
 				status = exit_shell(tokens);
 			free_tokens(tokens, argc);
+			free_env_list();
 			return (status);
 		}
 		built = get_builtin_func(tokens);
@@ -44,5 +49,6 @@ int main(void)
 		}
 		free_tokens(tokens, argc);
 	}
+	free_env_list();
 	return (0);
 }

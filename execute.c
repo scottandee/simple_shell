@@ -15,7 +15,7 @@ int execute(char **args)
 
 	if (args[0] == NULL)
 	{
-		return (1);
+		return (0);
 	}
 
 	mypid = fork();

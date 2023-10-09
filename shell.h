@@ -9,6 +9,18 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 
+/**
+  * struct envi_s - Datatype for the shell's enviroment variable
+  * @name: Name of the variable
+  * @value: Value of the variable
+  * @next: Pointer to the next variable
+  */
+typedef struct envi_s
+{
+	char *name;
+	char *value;
+	struct envi_s *next;
+} envi_t;
 
 int _strlen(const char *s);
 char *_strcpy(char *dest, char *src);
@@ -23,13 +35,23 @@ void free_tokens(char **tokens, int argc);
 char **split_input(char *input_text, int *argc);
 int execute(char **args);
 char *_getenv(char *name);
+int _setenv(char *name, char *value);
+int _unsetenv(char *name);
+envi_t *add_env_end(envi_t **head, char *name, char *value);
+envi_t *build_env_list(void);
 int get_builtin_func(char **args);
+void free_env_list(void);
 char *find_path(char *command);
+int set_environ(char **args);
+int unset_environ(char **args);
+int remove_env_list(char *name);
 
 extern char **environ;
 extern int last_command_exit_status;
+extern envi_t *envi;
 
 int exit_shell(char **args);
 int print_env(char **args);
+
 
 #endif /*_SHELL_H_*/
