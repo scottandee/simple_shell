@@ -144,6 +144,7 @@ int change_dir(char **args)
 			old_pwd = _getenv("PWD");
 			_setenv("OLDPWD", old_pwd);
 			chdir(env);
+			fprintf(stdout, "%s\n", env);
 			free(old_pwd);
 		}
 		else
@@ -153,7 +154,7 @@ int change_dir(char **args)
 			status = chdir(args[1]);
 			if (status != 0)
 			{
-				fprintf(stderr, "Path not found\n");
+				fprintf(stderr, "./hsh: 1: cd: can't cd to %s\n", args[1]);
 				free(env);
 				return (1);
 			}
