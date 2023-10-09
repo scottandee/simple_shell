@@ -109,13 +109,15 @@ envi_t *build_env_list(void)
 int _setenv(char *name, char *value)
 {
 	envi_t *temp;
+	char *n;
 
 	if (name == NULL || value == NULL)
 	{
 		return (-1);
 	}
 
-	if (_getenv(name) == NULL)
+	n = _getenv(name);
+	if (n == NULL)
 	{
 		add_env_end(&envi, name, value);
 	}
@@ -128,9 +130,11 @@ int _setenv(char *name, char *value)
 			{
 				free(temp->value);
 				temp->value = _strdup(value);
+				break;
 			}
 			temp = temp->next;
 		}
+		free(n);
 	}
 	return (0);
 }
