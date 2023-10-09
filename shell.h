@@ -37,21 +37,22 @@ int execute(char **args);
 char *_getenv(char *name);
 int _setenv(char *name, char *value);
 int _unsetenv(char *name);
-envi_t *add_env_end(envi_t **head, char *name, char *value);
-envi_t *build_env_list(void);
 int get_builtin_func(char **args);
-void free_env_list(void);
 char *find_path(char *command);
-int set_environ(char **args);
-int unset_environ(char **args);
+
+envi_t *add_env_end(envi_t **head, char *name, char *value);
 int remove_env_list(char *name);
+void free_env_list(void);
+envi_t *build_env_list(void);
 
 extern char **environ;
 extern int last_command_exit_status;
 extern envi_t *envi;
 
+int set_environ(char **args);
+int unset_environ(char **args);
 int exit_shell(char **args);
 int print_env(char **args);
-
+int change_dir(char **args);
 
 #endif /*_SHELL_H_*/

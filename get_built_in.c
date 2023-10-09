@@ -10,12 +10,14 @@ int get_builtin_func(char **args)
 	char *builtin_str[] = {
 		"env",
 		"setenv",
-		"unsetenv"
+		"unsetenv",
+		"cd"
 	};
 	int (*builtin_func[]) (char **) = {
 		&print_env,
 		&set_environ,
-		&unset_environ
+		&unset_environ,
+		&change_dir
 	};
 	int i;
 	int builtin_num = sizeof(builtin_str) / sizeof(char *);

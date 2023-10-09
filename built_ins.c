@@ -110,3 +110,59 @@ int unset_environ(char **args)
 	}
 	return (0);
 }
+
+/**
+  * change_dir - Change the present directory to the path specified
+  *
+  * @args: This contains the command and the parameters
+  * Return: 0 on success, 1 on failure
+  */
+
+int change_dir(char **args)
+{
+	int count = 0, status, size = 1024;
+	char *cwd, *env, *old_pwd;
+
+	while (args[count] != NULL)
+		count++;
+
+	if (count == 1)
+	{
+		env = _getenv("HOME");
+		status = chdir(env);
+	}
+	if (count == 2)
+	{
+		if (strcmp(args[1], "-") == 0)
+		{
+			env = _getenv("OLDPWD");
+			if (env == NULL)
+			{
+				fprintf(stderr, "OLDPWD not set\n");
+				return (1);
+			}
+			old_pwd = _getenv("PWD");
+			_setenv("OLDPWD", old_pwd);
+			chdir(env);
+			free(old_pwd);
+		}
+		else
+		{
+			env = _getenv("PWD");
+			_setenv("OLDPWD", env);
+			status = chdir(args[1]);
+			if (status != 0)
+			{
+				fprintf(stderr, "Path not found\n");
+				free(env);
+				return (1);
+			}
+		}
+	}
+	cwd = malloc(sizeof(char) * size);
+	getcwd(cwd, size);
+	_setenv("PWD", cwd);
+	free(cwd);
+	free(env);
+	return (0);
+}
