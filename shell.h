@@ -42,6 +42,10 @@ int get_builtin_func(char **args);
 char **commands(char *input_text);
 char *find_path(char *command);
 
+
+char *environ_sub(char *var);
+char **variable_sub(char **tokens);
+
 envi_t *add_env_end(envi_t **head, char *name, char *value);
 int remove_env_list(char *name);
 void free_env_list(void);
